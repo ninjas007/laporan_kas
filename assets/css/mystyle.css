@@ -1,0 +1,274 @@
+body {
+  background: #f4f4f4;
+  width: 100%
+}
+
+footer p {
+  text-shadow: 1px 1px 1px white;
+  /*background: red*/
+}
+
+.copyright {
+  background: white;
+  box-shadow: 2px 2px 2px 2px
+}
+/*==========STAR FOR NAVBAR=======*/
+
+/* Add a black background color to the top navigation */
+.topnav {
+  background-color: blue;
+  overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 8px 10px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/*==========END FOR NAVBAR=======*/
+
+
+
+/*==========START ROW CONTENT=======*/
+
+.content-box {
+  width: 75%;
+  margin: auto;
+
+}
+
+.title-content {
+  background: white;
+  text-align: center;
+  padding: 10px;
+  box-shadow: 2px 2px 2px 1px;
+}
+
+#title{
+  color: #ff2c31;
+  text-shadow: 1px 1px 1px black;
+  font-weight: 700;
+}
+
+.row-content-value {
+  width: 75%;
+  margin: auto;
+  margin-top: 5px;
+}
+
+.row-content-2 {
+  background: white; 
+  padding: 10px; 
+  padding-top: 20px; 
+  margin-bottom: 20px;
+  box-shadow: 2px 2px 2px 1px;
+}
+
+/*==========END ROW CONTENT=======*/
+
+
+/*==========START TABLE DAFTAR ANGGOTA =======*/    
+
+.table-list {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+  }
+  .table-list caption {
+      font-size: 1.5em;
+      margin: .25em 0 .75em;
+  }
+  .table-list th,
+  .table-list td {
+      padding: .625em;
+      border:1px solid grey;
+      /*text-align: center;*/
+  }
+  .table-list th {
+      font-size: .85em;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      background: #ff2c31;
+      color: white;
+      text-align: center;
+  }
+
+  .table-list td{
+    text-align: left ;
+  }
+
+  @media screen and (max-width: 600px) {
+      .table-list {
+          border: 0;
+      }
+      .table-list caption {
+          font-size: 1.3em;
+      }
+      .table-list thead {
+          display: none;
+      }
+      .table-list tr {
+          border-bottom: 3px solid green;
+          display: block;
+          margin-bottom: .725em;
+      }
+      .table-list td {
+          display: block;
+          font-size: .8em;
+          text-align: right;
+      }
+      .table-list td:before {
+          content: attr(data-label);
+          float: left;
+          font-weight: bold;
+          text-transform: uppercase;
+      }
+      .table-list td:last-child {
+          border-bottom: 0;
+      }
+  }
+/*==========END TABLE DAFTAR ANGGOTA =======*/    
+
+
+
+/*==========START TABLE DETAIL ANGGOTA =======*/    
+
+
+    .table-detail {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    .table-detail caption {
+        font-size: 1.5em;
+        margin: .25em 0 .75em;
+    }
+
+    .table-detail th,
+    .table-detail td {
+        padding: 3px !important;
+        /*border:1px solid grey;*/
+        /*text-align: center;*/
+    }
+    .table-detail td:nth-child(1) {
+        width: 120px !important;
+        font-weight: 700;
+    }
+    /*@media screen and (max-width: 600px) {
+
+        .table-detail {
+            border: 0;
+        }
+        .table-detail caption {
+            font-size: 1.3em;
+        }
+        .table-detail thead {
+            display: none;
+        }
+        .table-detail tr {
+            border-bottom: 3px solid green;
+            display: block;
+            margin-bottom: .725em;
+        }
+        .table-detail td {
+            /*border-bottom: 1px solid green;
+            display: block;
+            font-size: .8em;
+            text-align: right;
+        }
+        .table-detail td:before {
+            content: attr(data-label);
+            float: left;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .table-detail td:last-child {
+            border-bottom: 0;
+        }
+    }*/
+  /*==========END TABLE DETAIL ANGGOTA =======*/ 
+  
+
+
+
+  /*========== START MIX MEDIA QUERY DETAIL AND DAFTAR ANGGOTA =======*/ 
+
+    /*.detail-list {
+      padding: 20px;
+      background:white;
+      box-shadow: 2px 2px 2px 1px;
+    }*/
+  
+   /* @media screen and (max-width: 900px) {
+        .box-detail{
+          margin-left: 0 !important;
+          background: white !important;
+        }
+        .img-detail{
+          width: 50% !important;
+          justify-content: center !important;
+          display: flex !important;
+          height: 100%;
+          margin-bottom: 20px;
+        }
+        .table-daftar-anggota{
+          background: white !important;
+
+        }
+    }
+
+    @media screen and (max-width: 500px) {
+      .img-detail{
+          width: 100% !important;
+      }
+    }*/
+  /*==========END MIX MEDIA QUERY DETAIL AND DAFTAR ANGGOTA =======*/ 
+
+
+  /*==========START STYLE DATA TABLE =======*/ 
+
+  #data1_length{
+    margin-bottom: 20px;
+    background: white;
+    padding: 5px;
+    box-shadow: 2px 2px 2px 1px;
+    border-radius: 5px;
+  }
+  #data1_filter{
+    margin-bottom: 20px;
+    background: white;
+    padding: 5px;
+    box-shadow: 2px 2px 2px 1px;
+    border-radius: 5px;
+  }
+
+  input[type="search"]{
+    background-color: #FEFEFE;
+    color: black;
+    margin-left: 15px;
+    width: 100%;
+  }
+
+  .pagination{
+    float: right;
+    margin: 0px;
+  }
+  /*==========END STYLE DATA TABLE =======*/ 
