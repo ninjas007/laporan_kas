@@ -11,7 +11,12 @@
   </head>
     
 <body>
-<div class="container" style=" margin-top: 20px; ">
+<div class="container" style="margin-top: 20px;"></div>
+<div class="row content-box">
+<p class="row" style="width: 75%; margin: auto; color: #ff0000;"><span style="color: #000000;"><strong><span class="style4"><a style="color: #000000;" href="https://orlokkanjuruhan.or.id">HOME</a></span></strong></span>&ensp;
+<span style="color: #000000;"><strong><span class="style4"><a style="color: #000000;" href="https://orlokkanjuruhan.or.id/blog">NEWS INFO</a></span></strong></span>&ensp;
+<span style="color: #000000;"><strong><span class="style4"><a style="color: #000000;" href="https://callsign.orlokkanjuruhan.or.id">DATA ANGGOTA</a></span></strong></span>&ensp;
+<span style="color: #000000;"><strong><span class="style4"><a style="color: #000000;" href="https://orlokkanjuruhan.or.id/sekretariat">SEKRETARIAT</a></span></strong></span></p>
   <?php if ($this->session->has_userdata('email')) : ?>
     <div class="row" style="width: 100%; margin: auto;">
       <div class="col-md-12">
@@ -25,6 +30,6 @@
     </div>
   <?php endif ?>
   <div class="row content-box">
-    <h4 class="title-content"><span id="title">DATABASE ANGGOTA ORARI LOKAL KANJURUHAN<br>KAB. MALANG JAWA TIMUR ( YC 3 ZKM )</span></h4>
+    <h4 class="title-content"><span id="title">DATABASE ANGGOTA ORARI LOKAL KANJURUHAN<br>KAB. MALANG JAWA TIMUR ( YC3ZKM )</span></h4>
   </div>
 	

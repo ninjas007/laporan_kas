@@ -1,0 +1,3 @@
+[12-Jan-2019 06:09:14 Asia/Jakarta] PHP Fatal error:  Cannot declare class Anggota, because the name is already in use in /home/amebiz/public_html/callsign/application/models/Anggota_model.php on line 264
+[12-Jan-2019 06:10:50 Asia/Jakarta] PHP Fatal error:  Cannot declare class Anggota, because the name is already in use in /home/amebiz/public_html/callsign/application/models/Anggota_model.php on line 264
+[12-Jan-2019 06:19:59 Asia/Jakarta] PHP Fatal error:  Cannot declare class Anggota, because the name is already in use in /home/amebiz/public_html/callsign/application/models/Anggota_model.php on line 264

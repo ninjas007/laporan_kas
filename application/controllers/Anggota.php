@@ -62,61 +62,71 @@ class Anggota extends CI_Controller {
 
 			$upload = $this->upload();
 
-			if ($upload['result'] == 'gagal') {
+			if ($upload['result'] == 'gagal')
+			{
+				$image = $upload['upload_data'];
 
-				if ($upload['upload_data']['is_image'] == TRUE) {
-					if (intval($upload['upload_data']['file_size']) > 2000) {
-						$this->session->set_flashdata('error', 'File Gambar Tidak Boleh Lebih dari 2Mb');
-						redirect(base_url());		
-					}	
-				} else {
-					$this->session->set_flashdata('error', 'Upload File Hanya Boleh Berupa jpg, png, jpeg');
-					redirect(base_url());
+				if ( $image['is_image'] == FALSE ) 
+				{
+					$this->session->set_flashdata('error', 'Upload gambar harus jpg, png, jpeg | Gambar diset default');
 				}
-			$this->session->set_flashdata('error', 'Kesalahan Upload Gambar, Gagal Menambah Data');
-			redirect(base_url());
-
-			} else {
-
-				$foto = $upload['upload_data']['file_name'];
-
-
-
-				$data = [
-					'callsign' => html_escape(strtoupper($this->input->post('callsign'))),
-					'nama' => html_escape(strtoupper($this->input->post('nama'))),
-					'alamat' => html_escape($this->input->post('alamat')),
-					'kecamatan_id' => $this->input->post('kecamatan'),
-					'nia' => html_escape(strtoupper($this->input->post('nia'))),
-					'pengurus' => html_escape($this->input->post('pengurus')),
-					'jabatan' => html_escape($this->input->post('jabatan')),
-					'pekerjaan' => html_escape(strtoupper($this->input->post('pekerjaan'))),
-					'tgl_buat' => date('Y-m-d'),
-					'tgl_valid' => date('Y-m-d', time() + (60 * 60 * 24 * 30)),
-					'masa_berlaku' => date('Y-m-d', time() + (60 * 60 * 24 * (365 * 3))),
-					'masa_berlaku_1' => date('Y-m-d', time() + (60 * 60 * 24 * 1096)),
-					'perpanjang' => 0,
-					'email' => $this->input->post('email'),
-					'agama' => html_escape(strtoupper($this->input->post('agama'))),
-					'no_hp' => $this->input->post('no_hp'),
-					'tgl_lahir' => $this->input->post('tgl_lahir'),
-					'status_id' => 1,
-					'foto' => $foto
-				];
-
-
-				$result = $this->anggota_model->addData($data);
-
-				if ($result > 0) {
-				    $this->session->set_flashdata('success', 'Berhasil Menambah Data');
-				    redirect(base_url());
-				} else {
-					$this->session->set_flashdata('error', 'Ada Kesalahan, Gagal Menambah Data');
-					if ($result == FALSE) {
-						$this->session->set_flashdata('error', 'Call Sign Sudah digunakan');
+				else
+				{
+					if (intval($image['file_size']) > 2000)
+					{
+						$this->session->set_flashdata('error', 'File gambar harus kurang dari 2Mb | Gambar diset default');
 					}
-					redirect(base_url());
 				}
+				
+				$foto = NULL;
+			} 
+			else
+			{
+				$foto = $upload['upload_data']['file_name'];
+			}
+
+			$masa_berlaku = date('Y-m-d', strtotime($this->input->post('berlaku')));
+			$masa_berlaku_1 = date('Y-m-d', strtotime($masa_berlaku) + (60 * 60 * 24));
+
+			if ($masa_berlaku == "1970-01-01") {
+				$masa_berlaku = date('Y-m-d', time() + (60 * 60 * 24 * (365 * 3)));
+				$masa_berlaku_1 = date('Y-m-d', time() + (60 * 60 * 24 * 1096));
+			}
+
+			$data = [
+				'callsign' 		=> html_escape(strtoupper($this->input->post('callsign'))),
+				'nama' 			=> html_escape(strtoupper($this->input->post('nama'))),
+				'alamat' 		=> html_escape($this->input->post('alamat')),
+				'kecamatan_id' 		=> $this->input->post('kecamatan'),
+				'nia' 			=> html_escape(strtoupper($this->input->post('nia'))),
+				'pengurus' 		=> html_escape($this->input->post('pengurus')),
+				'jabatan' 		=> html_escape($this->input->post('jabatan')),
+				'pekerjaan' 		=> html_escape(strtoupper($this->input->post('pekerjaan'))),
+				'tgl_buat' 		=> date('Y-m-d'),
+				'tgl_valid' 		=> date('Y-m-d', time() + (60 * 60 * 24 * 30)),
+				'masa_berlaku' 		=> $masa_berlaku,
+				'masa_berlaku_1'	=> $masa_berlaku_1,
+				'perpanjang' 		=> 0,
+				'email' 		=> $this->input->post('email'),
+				'agama' 		=> html_escape(strtoupper($this->input->post('agama'))),
+				'no_hp' 		=> $this->input->post('no_hp'),
+				'tgl_lahir' 		=> $this->input->post('tgl_lahir'),
+				'status_id' 		=> $this->input->post('status'),
+				'foto' 			=> $foto
+			];
+
+
+			$result = $this->anggota_model->addData($data);
+
+			if ($result > 0) {
+			    $this->session->set_flashdata('success', 'Berhasil Menambah Data');
+			    redirect(base_url());
+			} else {
+				$this->session->set_flashdata('error', 'Ada Kesalahan, Gagal Menambah Data');
+				if ($result == FALSE) {
+					$this->session->set_flashdata('error', 'Call Sign Sudah digunakan');
+				}
+				redirect(base_url());
 			}
 			
 		}
@@ -147,33 +157,34 @@ class Anggota extends CI_Controller {
 
 			$upload = $this->upload();
 
-			if ($upload['result'] == 'gagal') {
+			if ($upload['result'] == 'gagal')
+			{
+				$image = $upload['upload_data'];
 
-				if ($upload['upload_data']['file_type'] !== "") {
-					
-					if ($upload['upload_data']['is_image'] == TRUE) {
-						if ($upload['upload_data']['file_size'] > 2000) {
-							$this->session->set_flashdata('error', 'File Gambar Tidak Boleh Lebih dari 2Mb');
-							redirect(base_url());
-						}	
-					} else {
-						$this->session->set_flashdata('error', 'Upload File Hanya Boleh Berupa jpg, png, jpeg');
-						redirect(base_url());
-					}
-			
+				if ( $image['is_image'] == FALSE ) 
+				{
+					$this->session->set_flashdata('error', 'Upload gambar harus jpg, png, jpeg | Gambar tidak diubah');
 				}
-
-			$tbl_anggota = $this->db->where('id_anggota', $id)->get('tbl_anggota')->row();
-			$foto = $tbl_anggota->foto;
-
-			} else {
-
-			$foto = $upload['upload_data']['file_name'];
-			
+				else
+				{
+					if (intval($image['file_size']) > 2000)
+					{
+						$this->session->set_flashdata('error', 'File gambar harus kurang dari 2Mb | Gambar tidak diubah');
+					}
+				}
+				
+				$tbl_anggota = $this->db->where('id_anggota', $id)->get('tbl_anggota')->row();
+				$foto = $tbl_anggota->foto;
+			} 
+			else
+			{
+				$foto = $upload['upload_data']['file_name'];
 			}
 
 			$status_id = $this->input->post('status');
-
+			$masa_berlaku = date('Y-m-d', strtotime($this->input->post('berlaku')));
+			$masa_berlaku_1 = date('Y-m-d', strtotime($masa_berlaku) + (60 * 60 * 24));
+ 			
 			if ($status_id == 4) {
 				$perpanjang = 1;
 			}else{
@@ -181,21 +192,23 @@ class Anggota extends CI_Controller {
 			}
 
 			$data = [
-				'id_anggota' => $id,
-				'nama' => html_escape(strtoupper($this->input->post('nama'))),
-				'alamat' => html_escape($this->input->post('alamat')),
-				'kecamatan_id' => $this->input->post('kecamatan'),
-				'nia' => html_escape(strtoupper($this->input->post('nia'))),
-				'pengurus' => html_escape($this->input->post('pengurus')),
-				'jabatan' => html_escape($this->input->post('jabatan')),
-				'pekerjaan' => html_escape(strtoupper($this->input->post('pekerjaan'))),
-				'email' => $this->input->post('email'),
-				'perpanjang' => $perpanjang,
-				'agama' => html_escape(strtoupper($this->input->post('agama'))),
-				'no_hp' => $this->input->post('no_hp'),
-				'tgl_lahir' => $this->input->post('tgl_lahir'),
-				'status_id' => $status_id,
-				'foto' => $foto
+				'id_anggota' 	=> $id,
+				'nama' 			=> html_escape(strtoupper($this->input->post('nama'))),
+				'alamat' 		=> html_escape($this->input->post('alamat')),
+				'kecamatan_id' 	=> $this->input->post('kecamatan'),
+				'nia' 			=> html_escape(strtoupper($this->input->post('nia'))),
+				'pengurus' 		=> html_escape($this->input->post('pengurus')),
+				'jabatan' 		=> html_escape($this->input->post('jabatan')),
+				'pekerjaan' 	=> html_escape(strtoupper($this->input->post('pekerjaan'))),
+				'masa_berlaku' 	=> $masa_berlaku,
+				'masa_berlaku_1'=> $masa_berlaku_1,
+				'email' 		=> html_escape($this->input->post('email')),
+				'perpanjang' 	=> $perpanjang,
+				'agama' 		=> html_escape(strtoupper($this->input->post('agama'))),
+				'no_hp' 		=> $this->input->post('no_hp'),
+				'tgl_lahir' 	=> $this->input->post('tgl_lahir'),
+				'status_id' 	=> $status_id,
+				'foto' 			=> $foto
 			];
 
 			$result = $this->anggota_model->updateData($data);

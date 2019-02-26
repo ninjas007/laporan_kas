@@ -150,6 +150,7 @@ class Anggota_model extends CI_Model {
 		$this->db->select('SUM(status_id = 2) AS valid');
 		$this->db->select('SUM(status_id = 3) AS invalid');
 		$this->db->select('SUM(status_id = 4) AS perpanjang');
+		$this->db->select('SUM(status_id = 5) AS seumur_hidup');
 		$this->db->from('tbl_anggota');
 
 		return $this->db->get()->row();

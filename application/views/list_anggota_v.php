@@ -28,7 +28,7 @@
           </div>
       </div>
       <div class="col-md-7">
-        <a href="<?php echo base_url() ?>"><img src="<?php echo base_url() ?>assets/image/orari.png" alt="" class="pull-right" style="width: 100%;" height="100"></a>
+        <a href="<?php echo base_url() ?>"><img src="<?php echo base_url() ?>assets/image/orlok.png" alt="" class="pull-right" style="width: 95%;" height="125"></a>
       </div>
     </div>
     <div class="row table-daftar-anggota">
@@ -44,7 +44,7 @@
               <strong><?php echo $this->session->flashdata('error'); ?></strong>
           </div>
       <?php endif ?>
-      <div class="text-center" style="font-weight: bold;"><span style="color: green">TOTAL DATA : <?= $total_data->total_data ?></span>, <span >BARU : <?= $total_data->baru ?></span>, <span style="color: blue">VALID : <?= $total_data->valid ?></span>, <span style="color: red">INVALID : <?= $total_data->invalid ?></span>, <span style="color: #700000">PERPANJANG : <?= $total_data->perpanjang ?></span></div>
+      <div class="text-center" style="font-weight: bold;"><span style="color: green">TOTAL DATA : <?= $total_data->total_data ?></span>, <span >BARU : <?= $total_data->baru ?></span>, <span style="color: blue">VALID : <?= $total_data->valid ?></span>, <span style="color: red">INVALID : <?= $total_data->invalid ?></span>, <span style="color: #700000">PERPANJANG : <?= $total_data->perpanjang ?></span>, <span style="color: #BDA55A">SEUMUR HIDUP : <?= $total_data->seumur_hidup ?></span></div>
       <br>
       <table class="table table-hover table-responsive table-list" style="background: white; padding: 0px;" id="data1">
         <thead>
@@ -70,15 +70,21 @@
             <td style="text-align: center;" id="callsign"><?= $a->callsign ?></td>
             <td><?= $a->nama ?></td>
             <td><?= $a->alamat ?></td>
+            <?php if ($a->status_id == 5): ?>
+            <td style="text-align: center;"> - </td>
+            <?php else: ?>  
             <td style="text-align: center;"><?= date('d-m-Y', strtotime($a->masa_berlaku)) ?></td>
+            <?php endif ?>
             <?php if($a->status_id == 1) { ?>
               <td style="text-align: center;"><strong><?= $a->status ?></strong>
             <?php }else if($a->status_id == 2){ ?>
               <td style="color: blue; text-align: center;"><strong><?= $a->status ?></strong></td>
             <?php }else if($a->status_id == 3){ ?>
               <td style="color: red; text-align: center;"><strong><?= $a->status ?></strong></td>
-            <?php }else{ ?>
+             <?php }else if($a->status_id == 4){ ?>
               <td style="color: #700000; text-align: center;"><strong><?= $a->status ?></strong></td>
+            <?php }else{ ?>
+              <td style="color: #BDA55A; text-align: center;"><strong><?= $a->status ?></strong></td>
             <?php } ?>
             <td><a class="btn btn-primary btn-sm detail">DETAIL</a></td>
             <?php if ($this->session->has_userdata('email')) :?>

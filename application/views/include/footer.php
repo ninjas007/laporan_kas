@@ -3,9 +3,30 @@
       <hr>
       <footer class="main-footer fixed-bottom" style="width: 100%; ">
           <div class="text-center hidden-xs">
-            <p>UPDATE DATA TERBARU DATABASE ANGGOTA ORARI LOKAL KANJURUHAN<br>KAB. MALANG JAWA TIMUR ( YC 3 ZKM ) <br> TERAKHIR TANGGAL <span style="color: blue"><?= date('d-m-Y / H:i:s', strtotime($waktu_update->waktu_update)) ?></span></p>
+            <style type="text/css">
+<!--
+.style2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+}
+-->
+</style>
+<p align="center"><span class="style2">DATABASE ANGGOTA  ORARI LOKAL KANJURUHAN KAB. MALANG  JAWA TIMUR ( YC3ZKM ),<br>
+JIKA CALLSIGN ANDA  MASIH AKTIF DAN BELUM TERDAFTAR PADA DATABASE INI SILAHKAN <a href="https://orlokkanjuruhan.or.id/contact-us/form-kirim-berkas/" title="Click here to upload files">KIRIM BERKAS ONLINE</a><br>
+UPDATE DATA TERAKHIR  TANGGAL</span><span style="color: blue">   
+  <?= date('d-m-Y / H:i:s', strtotime($waktu_update->waktu_update)) ?>   
+  </span></p>
             <br><br>
-            <div class="copyright">2019 <strong style="color: #ff2c31">ORARI</strong></div>
+            <style type="text/css">
+<!--
+.style1 {
+	font-size: 11px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: bold;
+}
+-->
+</style>
+<div class="copyright style1">Copyright@2019 ORLOK KANJURUHAN-YC3ZKM</div>
         </div>
       </footer>
     </div>
@@ -21,64 +42,78 @@
 
        function table_anggota(data){
         
-        function waktu(time) {
+        if (data.foto == null) {
+          output = `<td valign="top" align="center"><img class="img-detail" src="assets/image/foto_blank.png" style="width:120px; height:150px"></td>`
+        } else {
+          output =  `<td valign="top" align="center"><img class="img-detail" src="assets/image/`+data.foto+`" style="width:120px; height:150px"></td>`
+        }
+        function waktu(time, status_id) {
             var r = time.match(/^\s*([0-9]+)\s*-\s*([0-9]+)\s*-\s*([0-9]+)(.*)$/);
-            return r[3]+"-"+r[2]+"-"+r[1]+r[4];
+            var hasil = r[3]+"-"+r[2]+"-"+r[1]+r[4];
+
+            if (status_id == 5 || hasil == '00-00-0000') {
+              return '-';
+            } else {
+              return hasil
+            }
         }
 
         $('.table-daftar-anggota')
-                .html('<center style="background:white; padding:20px; box-shadow: 2px 2px 2px 1px;"><table width="500">\
-                  <tbody>\
-                    <tr>\
-                      <td valign="top" align="center"><img class="img-detail" src="assets/image/'+data.foto+'" style="width:120px; height:150px"></td>\
-                      <td>\
-                        <table class="table-detail table table-striped"  style="margin-left:10px;">\
-                          <tbody>\
-                            <tr>\
-                              <td>Callsign</td><td>'+data.callsign+'</td>\
-                            </tr>\
-                            <tr>\
-                              <td>Nama</td><td>'+data.nama+'</td>\
-                            </tr>\
-                            <tr>\
-                              <td>Alamat</td><td>'+data.alamat+'</td>\
-                            </tr>\
-                            <tr>\
-                              <td>Kecamatan</td><td>'+data.nama_kecamatan+'</td>\
-                            </tr>\
-                            <tr>\
-                              <td>NIA</td><td>'+data.nia+'</td>\
-                            </tr>\
-                            <tr>\
-                              <td>Berlaku</td><td>'+waktu(data.masa_berlaku)+'</td>\
-                            </tr>\
-                            <tr>\
-                              <td>Status</td><td>'+data.status+'</td>\
-                            </tr>\
-                            <tr>\
-                              <td>Pengurus</td><td>'+data.pengurus+'</td>\
-                            </tr>\
-                            <tr>\
-                              <td>Pekerjaan</td><td>'+data.pekerjaan+'</td>\
-                            </tr>\
-                            <tr>\
-                              <td>Email</td><td>'+data.email+'</td>\
-                            </tr>\
-                            <tr>\
-                              <td>Agama</td><td>'+data.agama+'</td>\
-                            </tr>\
-                            <tr>\
-                              <td>No. Hp</td><td>'+data.no_hp+'</td>\
-                            </tr>\
-                            <tr>\
-                              <td>Tanggal Lahir</td><td>'+waktu(data.tgl_lahir)+'</td>\
-                            </tr>\
-                          </tbody>\
-                        </table>\
-                      </td>\
-                    </tr>\
-                  <tbody>\
-                  </table></center>')
+                .html(`<center style="background:white; padding:20px; box-shadow: 2px 2px 2px 1px;"><table width="500">
+                  <tbody>
+                    <tr> 
+                      `+output+`
+                      <td>
+                        <table class="table-detail table table-striped"  style="margin-left:10px;">
+                          <tbody>
+                            <tr>
+                              <td>Callsign</td><td>`+data.callsign+`</td>
+                            </tr>
+                            <tr>
+                              <td>Nama</td><td>`+data.nama+`</td>
+                            </tr>
+                            <tr>
+                              <td>Alamat</td><td>`+data.alamat+`</td>
+                            </tr>
+                            <tr>
+                              <td>Kecamatan</td><td>`+data.nama_kecamatan+`</td>
+                            </tr>
+                            <tr>
+                              <td>NRI</td><td>`+data.nia+`</td>
+                            </tr>
+                            <tr>
+                              <td>Berlaku</td><td>`+waktu(data.masa_berlaku, data.status_id)+`</td>
+                            </tr>
+                            <tr>
+                              <td>Status</td><td>`+data.status+`</td>
+                            </tr>
+                            <tr>
+                              <td>Pengurus</td><td>`+data.pengurus+`</td>
+                            </tr>
+			    <tr>
+                              <td>Jabatan</td><td>`+data.jabatan+`</td>
+                            </tr>
+                            <tr>
+                              <td>Pekerjaan</td><td>`+data.pekerjaan+`</td>
+                            </tr>
+                            <tr>
+                              <td>Email</td><td>`+data.email+`</td>
+                            </tr>
+                            <tr>
+                              <td>Agama</td><td>`+data.agama+`</td>
+                            </tr>
+                            <tr>
+                              <td>No. Hp</td><td>`+data.no_hp+`</td>
+                            </tr>
+                            <tr>
+                              <td>Tanggal Lahir</td><td>`+waktu(data.tgl_lahir, data.status_id)+`</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  <tbody>
+                  </table></center>`)
        }
 
        $('#cari_kecamatan').click(function(e) {
@@ -144,17 +179,8 @@
       $(function () {
           $('#data1').DataTable({
             "iDisplayLength": 10,
-            "aLengthMenu": [[5, 10, 20, 50, -1], [5, 10, 20, 50, "All"]]
+            "aLengthMenu": [[10, 50, 100, 200, -1], [10, 50, 100, 200, "All"]]
           })
-
-          $('#example2').DataTable({
-              'paging'      : true,
-              'lengthChange': false,
-              'searching'   : false,
-              'ordering'    : true,
-              'info'        : true,
-              'autoWidth'   : false
-            })
           })
    </script>
   </body>
